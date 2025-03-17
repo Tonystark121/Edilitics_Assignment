@@ -4,6 +4,7 @@ import BarGraph from './pages/chart.jsx'
 import {useDispatch, useSelector} from 'react-redux'
 import { fetchCovidData } from './redux/dataSlice.js';
 import Navbar from './components/nav.jsx';
+import LinePlot from './pages/LinePlot.jsx';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
       <div className={`app ${theme}`}>
         <Navbar />
         <BarGraph />
-        <BarGraph />
+        <LinePlot />
       </div>
     </>
   )

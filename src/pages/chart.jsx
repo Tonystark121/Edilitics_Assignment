@@ -9,9 +9,8 @@ const BarGraph = () => {
   const { data, sortType, theme } = useSelector((state) => state.covidData);
   const svgRef = useRef();
   const tooltipRef = useRef();
-  const legendData = [{ label: "Positive Cases", color: "steelblue" }];
-
   const barColor = theme === "light" ? "steelblue" : "#ffcc00";
+  const legendData = [{ label: "Positive Cases", color: barColor }];
   const textColor = theme === "light" ? "black" : "white";
 
   useEffect(() => {
@@ -187,7 +186,7 @@ const BarGraph = () => {
         d3
           .zoom()
           .scaleExtent([1, 5])
-          // .translateExtent(extent)
+          .translateExtent(extent)
           .extent(extent)
           .on("zoom", zoomed)
       );
