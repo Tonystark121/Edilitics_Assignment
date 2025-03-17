@@ -17,6 +17,11 @@
     margin-bottom: 20px;
     text-align: center;
   }
+
+  /*  */
+  .filter-box{
+    width: 70%;
+  }
   
   /* Center the SVG */
   .chart-wrapper {

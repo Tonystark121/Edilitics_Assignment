@@ -1,118 +1,19 @@
-// import React, { useEffect, useState, useRef } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import * as d3 from "d3";
-// import "../css/chart.css";
-
-// const BarGraph = () => {
-//   // creating a valid dataset for bargraph.
-//   const [stateCases, setStateCase] = useState([]);
-//   const { data } = useSelector((state) => state.covidData);
-
-//   useEffect(() => {
-//     if (!data || data.length === 0) return;
-
-//     const transformedData = data.map((ele) => ({
-//       state: ele.state,
-//       positive: ele.positive,
-//     }));
-
-//     setStateCase(transformedData);
-//   }, [data]);
-
-//   // console.log(stateCases);
-
-//   // creating graph component.
-
-//   const svgRef = useRef();
-
-//   useEffect(() => {
-//     if (!stateCases || stateCases.length == 0) return;
-
-//     // setting up dimentions
-//     const width = 928;
-//     const height = 600;
-//     const margin = { top: 20, right: 30, bottom: 50, left: 60 };
-
-//     // creating svg container
-//     const svg = d3
-//       .select(svgRef.current)
-//       .attr("width", width)
-//       .attr("height", height)
-//       .style("background", "#f5f5f5");
-
-//     const x = d3
-//       .scaleBand()
-//       .domain(d3.sort(stateCases, d => -d.positive).map(d => d.state))
-//       .range([margin.left, width - margin.right])
-//       .padding(0.1);
-
-//     const y = d3
-//       .scaleLinear()
-//       .domain([0, d3.max(data, (d) => d.positive)])
-//       .nice()
-//       .range([height - margin.bottom, margin.top]);
-
-//     // Clear previous SVG elements
-//     svg.selectAll("*").remove();
-
-//     // Append X Axis
-//     svg
-//       .append("g")
-//       .attr("transform", `translate(0, ${height - margin.bottom})`)
-//       .call(d3.axisBottom(x))
-//       .selectAll("text")
-//       .attr("transform", "rotate(-45)")
-//       .style("text-anchor", "end");
-
-//     // Append Y Axis
-//     svg
-//       .append("g")
-//       .attr("transform", `translate(${margin.left}, 0)`)
-//       .call(d3.axisLeft(y));
-
-//     // Append bars
-//     svg
-//       .selectAll(".bar")
-//       .data(stateCases)
-//       .enter()
-//       .append("rect")
-//       .attr("class", "bar")
-//       .attr("x", (d) => x(d.state))
-//       .attr("y", (d) => y(d.positive))
-//       .attr("width", x.bandwidth())
-//       .attr("height", (d) => height - margin.bottom - y(d.positive))
-//       .attr("fill", "steelblue")
-//       .on("mouseover", function (event, d) {
-//         d3.select(this).attr("fill", "orange");
-//       })
-//       .on("mouseout", function (event, d) {
-//         d3.select(this).attr("fill", "steelblue");
-//       });
-//   }, [stateCases]);
-
-//   return (
-//     <div className="chart-container">
-//       <h1 className="chart-title">COVID-19 Cases by State (2021)</h1>
-//       <div className="chart-wrapper">
-//         <svg ref={svgRef} width={800} height={400}></svg>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default BarGraph;
-
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import * as d3 from "d3";
 import "../css/chart.css";
+import FilterBar from "../components/filter";
 
 const BarGraph = () => {
   const [stateCases, setStateCase] = useState([]);
-  const { data } = useSelector((state) => state.covidData);
+  const { data, sortType } = useSelector((state) => state.covidData);
   const svgRef = useRef();
   const tooltipRef = useRef();
   const legendData = [{ label: "Positive Cases", color: "steelblue" }];
+
+  useEffect(()=>{
+    console.log('In chartJs', sortType)
+  },[sortType])
 
   useEffect(() => {
     if (!data || !Array.isArray(data) || data.length === 0) return;
@@ -156,9 +57,15 @@ const BarGraph = () => {
 
     const x = d3
       .scaleBand()
-      .domain(d3.sort(data, (d) => -d.positive).map((d) => d.state))
+      .domain(
+        sortType === "ascending"
+          ? d3.sort(data, (d) => d.positive).map((d) => d.state)
+          : sortType === "descending"
+          ? d3.sort(data, (d) => -d.positive).map((d) => d.state)
+          : data.map((d) => d.state)
+      )
       .range([margin.left, width - margin.right])
-      .padding(0.1);
+      .padding(0.1)
 
     const y = d3
       .scaleLinear()
@@ -306,18 +213,21 @@ const BarGraph = () => {
         svg.call(
           d3
             .zoom()
-            .scaleExtent([1, 5]) // Zoom range: 1x to 5x
-            .translateExtent(extent) // Allow panning only within the chart bounds
+            .scaleExtent([1, 5]) 
+            .translateExtent(extent)
             .extent(extent)
-            .on("zoom", zoomed) // Now zoomed is defined before usage
+            .on("zoom", zoomed)
         );
       }
     }
-  }, [stateCases]);
+  }, [stateCases, sortType]);
 
   return (
     <div className="chart-container">
       <h1 className="chart-title">COVID-19 Cases by State (2021)</h1>
+      <div className="filter-box">
+        <FilterBar />
+      </div>
       <div className="chart-wrapper">
         <svg ref={svgRef}></svg>
         <div ref={tooltipRef} className="tooltip"></div>

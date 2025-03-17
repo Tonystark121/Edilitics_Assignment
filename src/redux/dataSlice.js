@@ -13,10 +13,21 @@ const fetchDataSlice = createSlice({
     initialState:{
         data:[],
         status:'idle',
-        error:null
+        error:null,
+        sortType:'default'
     },
 
-    reducers:{},
+    reducers:{
+        sortAscending: (state) => {
+            state.sortType = 'ascending'
+        },
+        sortDescending: (state) => {
+            state.sortType = 'descending'
+        },
+        Unorderd: (state) => {
+            state.sortType = 'default'
+        }
+    },
     extraReducers:(builder) => {
         builder 
             .addCase(fetchCovidData.pending, (state) => {
@@ -34,5 +45,5 @@ const fetchDataSlice = createSlice({
     }
 })
 
-
+export const {sortAscending, sortDescending, Unorderd} = fetchDataSlice.actions
 export default fetchDataSlice.reducer;
