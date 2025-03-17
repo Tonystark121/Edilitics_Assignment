@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../css/filter.css";
 import { ascending, dispatch } from "d3";
 import {sortAscending, sortDescending, Unorderd} from '../redux/dataSlice.js'
 
-const FilterBar = () => {
+const FilterBar = ({stateCases, setStateCases}) => {
   const [state, setState] = useState("");
   const [positiveCases, setPositiveCases] = useState("");
+
+  const {theme} = useSelector(state => state.covidData)
 
   const dispatch = useDispatch();
 
@@ -26,15 +28,16 @@ const FilterBar = () => {
     }
   };
 
-//   const handleAdd = () => {
-//     if (!state || !positiveCases || isNaN(positiveCases)) return;
-//     dispatch(addData({ state, positive: parseInt(positiveCases, 10) }));
-//     setState("");
-//     setPositiveCases("");
-//   };
+  const handleAdd = () => {
+    if (!state || !positiveCases || isNaN(positiveCases)) return;
+    setStateCases(prev => [...prev, {state:state, positive: +positiveCases}])
+    console.log('added new data')
+    setState("");
+    setPositiveCases("");
+  };
 
   return (
-    <div className="filter-container">
+    <div className={`filter-container ${theme === "dark" ? "dark-theme" : "light-theme"}`}>
       <div className="sort-section">
         <label>Sort By:</label>
         <select onChange={(e) => handleSort(e.target.value)} >
@@ -49,15 +52,15 @@ const FilterBar = () => {
           type="text"
           placeholder="State Name"
           value={state}
-        //   onChange={(e) => setState(e.target.value)}
+          onChange={(e) => setState(e.target.value)}
         />
         <input
           type="number"
           placeholder="Positive Cases"
           value={positiveCases}
-        //   onChange={(e) => setPositiveCases(e.target.value)}
+          onChange={(e) => setPositiveCases(e.target.value)}
         />
-        <button >+</button>
+        <button onClick={handleAdd} >+</button>
       </div>
     </div>
   );

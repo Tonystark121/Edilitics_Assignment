@@ -1,44 +1,109 @@
-
 .chart-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 20px;
-    background-color: #f8f9fa; 
-  }
-  
-  /* Stylish heading */
-  .chart-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  /* background-color: #f8f9fa;  */
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
 
-  /*  */
-  .filter-box{
-    width: 70%;
-  }
-  
-  /* Center the SVG */
-  .chart-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    overflow-x: auto; /* Allow scrolling if needed */
-  }
-  
-  /* Improve bar appearance */
-  .bar {
-    fill: #007bff; /* Blue bars */
-    transition: fill 0.3s;
-  }
-  
-  .bar:hover {
-    fill: #0056b3; /* Darker on hover */
-  }
-  
+/* Light Theme */
+.light-theme {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+/* Stylish heading */
+.chart-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  transition: color 0.5s ease-in-out;
+}
+
+.dark-theme .chart-title {
+  color: #ffffff;
+}
+
+/*  */
+.filter-box {
+  width: 70%;
+  transition: background-color 0.5s ease-in-out;
+}
+
+/* Center the SVG */
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  transition: background-color 0.5s ease-in-out;
+}
+
+/* Improve bar appearance */
+.bar {
+  fill: var(--bar-color, #007bff);
+  transition: fill 0.3s, height 0.3s ease-in-out;
+}
+
+.bar:hover {
+  fill: var(--bar-hover-color, #0056b3);
+}
+
+.tooltip {
+  position: absolute;
+  background: var(--tooltip-bg, #fff);
+  color: var(--tooltip-color, #333);
+  border: 1px solid var(--tooltip-border, #ddd);
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+/* Apply dark mode styles dynamically */
+.dark-theme .tooltip {
+  background: #333;
+  color: #fff;
+  border: 1px solid #777;
+}
+
+.dark-theme .bar {
+  fill: #ffcc00;
+}
+
+.dark-theme .bar:hover {
+  fill: #ffaa00;
+}
+
+/* Legend Styles */
+.legend-item rect {
+  fill: var(--legend-color, steelblue);
+}
+
+.dark-theme .legend-item rect {
+  fill: #ffcc00;
+}
+
+/* Text above bars */
+.label {
+  fill: var(--label-color, black);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.dark-theme .label {
+  fill: white;
+}

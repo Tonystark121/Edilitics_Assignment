@@ -14,7 +14,8 @@ const fetchDataSlice = createSlice({
         data:[],
         status:'idle',
         error:null,
-        sortType:'default'
+        sortType:'default',
+        theme:'light'
     },
 
     reducers:{
@@ -26,6 +27,9 @@ const fetchDataSlice = createSlice({
         },
         Unorderd: (state) => {
             state.sortType = 'default'
+        },
+        toggleTheme: (state) => {
+            state.theme = state.theme === 'light' ? 'dark' : 'light';
         }
     },
     extraReducers:(builder) => {
@@ -45,5 +49,5 @@ const fetchDataSlice = createSlice({
     }
 })
 
-export const {sortAscending, sortDescending, Unorderd} = fetchDataSlice.actions
+export const {sortAscending, sortDescending, Unorderd, addData, toggleTheme} = fetchDataSlice.actions
 export default fetchDataSlice.reducer;

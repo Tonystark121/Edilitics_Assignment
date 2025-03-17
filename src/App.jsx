@@ -8,7 +8,7 @@ import Navbar from './components/nav.jsx';
 function App() {
 
   const dispatch = useDispatch();
-  const {status, data, error} = useSelector(state => state.covidData)
+  const {status, data, error, theme} = useSelector(state => state.covidData)
 
   console.log(status, data, error)
 
@@ -20,8 +20,10 @@ function App() {
 
   return (
     <>
-      <Navbar />
-      <BarGraph />
+      <div className={`app ${theme}`}>
+        <Navbar />
+        <BarGraph />
+      </div>
     </>
   )
 }

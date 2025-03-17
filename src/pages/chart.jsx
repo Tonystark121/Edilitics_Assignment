@@ -5,15 +5,18 @@ import "../css/chart.css";
 import FilterBar from "../components/filter";
 
 const BarGraph = () => {
-  const [stateCases, setStateCase] = useState([]);
-  const { data, sortType } = useSelector((state) => state.covidData);
+  const [stateCases, setStateCases] = useState([]);
+  const { data, sortType, theme } = useSelector((state) => state.covidData);
   const svgRef = useRef();
   const tooltipRef = useRef();
   const legendData = [{ label: "Positive Cases", color: "steelblue" }];
 
-  useEffect(()=>{
-    console.log('In chartJs', sortType)
-  },[sortType])
+  const barColor = theme === "light" ? "steelblue" : "#ffcc00";
+  const textColor = theme === "light" ? "black" : "white";
+
+  useEffect(() => {
+    console.log("In chartJs", sortType);
+  }, [sortType]);
 
   useEffect(() => {
     if (!data || !Array.isArray(data) || data.length === 0) return;
@@ -25,11 +28,13 @@ const BarGraph = () => {
         positive: ele.positive,
       }));
 
-    setStateCase(transformedData);
+    setStateCases(transformedData);
   }, [data]);
 
   useEffect(() => {
     if (!stateCases || stateCases.length === 0) return;
+
+    console.log("In chartJs stateCases length", stateCases.length, stateCases);
 
     const width = 1000;
     const height = 600;
@@ -65,11 +70,11 @@ const BarGraph = () => {
           : data.map((d) => d.state)
       )
       .range([margin.left, width - margin.right])
-      .padding(0.1)
+      .padding(0.1);
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(stateCases, (d) => d.positive) || 0])
+      .domain([0, d3.max(stateCases, (d) => d.positive) || 1])
       .nice()
       .range([height - margin.bottom, margin.top]);
 
@@ -81,7 +86,7 @@ const BarGraph = () => {
     const bars = g
       .append("g")
       .attr("class", "bars")
-      .attr("fill", "steelblue")
+      .attr("fill", barColor)
       .selectAll("rect")
       .data(stateCases)
       .join("rect")
@@ -103,7 +108,7 @@ const BarGraph = () => {
           .style("top", `${event.pageY - 20}px`);
       })
       .on("mouseout", function () {
-        d3.select(this).attr("fill", "steelblue");
+        d3.select(this).attr("fill", barColor);
         tooltip.style("opacity", 0);
       });
 
@@ -115,7 +120,7 @@ const BarGraph = () => {
       .data(stateCases)
       .join("text")
       .attr("text-anchor", "middle")
-      .attr("fill", "black")
+      .attr("fill", textColor)
       .attr("font-size", "12px")
       .attr("font-weight", "bold")
       .text((d) => `${Math.floor(d.positive / 100000)}L`)
@@ -145,7 +150,7 @@ const BarGraph = () => {
           .attr("y", 0)
           .attr("width", 15)
           .attr("height", 15)
-          .attr("fill", d.color);
+          .attr("fill", textColor);
 
         d3.select(this)
           .append("text")
@@ -213,7 +218,7 @@ const BarGraph = () => {
         svg.call(
           d3
             .zoom()
-            .scaleExtent([1, 5]) 
+            .scaleExtent([1, 5])
             .translateExtent(extent)
             .extent(extent)
             .on("zoom", zoomed)
@@ -224,9 +229,9 @@ const BarGraph = () => {
 
   return (
     <div className="chart-container">
-      <h1 className="chart-title">COVID-19 Cases by State (2021)</h1>
+      <h1 className="chart-title" style={{color: theme==='dark' ? '#FFF' : ''}}>COVID-19 Cases by State (2021)</h1>
       <div className="filter-box">
-        <FilterBar />
+        <FilterBar stateCases={stateCases} setStateCases={setStateCases} />
       </div>
       <div className="chart-wrapper">
         <svg ref={svgRef}></svg>

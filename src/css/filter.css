@@ -1,47 +1,90 @@
 .filter-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    margin-bottom: 15px;
-  }
-  
-  .sort-section label {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .sort-section select {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .add-section {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .add-section input {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 150px;
-  }
-  
-  .add-section button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .add-section button:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
+}
+
+/* Light Theme */
+.light-theme {
+  background: #f8f9fa;
+  color: #333;
+}
+
+.light-theme input,
+.light-theme select {
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.light-theme button {
+  background-color: #007bff;
+  color: white;
+}
+
+.light-theme button:hover {
+  background-color: #0056b3;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background: #222;
+  color: #ddd;
+}
+
+.dark-theme input,
+.dark-theme select {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.dark-theme button {
+  background-color: #ff9800;
+  color: black;
+}
+
+.dark-theme button:hover {
+  background-color: #e68900;
+}
+
+.sort-section label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.sort-section select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.add-section {
+  display: flex;
+  gap: 10px;
+}
+
+.add-section input {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 150px;
+}
+
+.add-section button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-section button:hover {
+  background-color: #0056b3;
+}
