@@ -23,6 +23,7 @@ function App() {
       <div className={`app ${theme}`}>
         <Navbar />
         <BarGraph />
+        <BarGraph />
       </div>
     </>
   )
