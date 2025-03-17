@@ -7,6 +7,7 @@
   padding: 20px;
   /* background-color: #f8f9fa;  */
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  padding-bottom: 40px;
 }
 
 /* Light Theme */
@@ -106,4 +107,23 @@
 
 .dark-theme .label {
   fill: white;
+}
+
+.dark-theme .chart-container p{
+  background: #333;
+  color: #fff;
+  border: 1px solid #777;
+}
+
+
+@media (max-width: 768px) {
+  .chart-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-title {
+    font-size: 18px;
+  }
 }

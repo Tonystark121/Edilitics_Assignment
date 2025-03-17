@@ -125,3 +125,10 @@
     display: none; /* Hide links on small screens (You can add a mobile menu if needed) */
   }
 }
+
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Hide links for smaller screens (add a mobile menu if needed) */
+  }
+}

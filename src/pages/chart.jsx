@@ -237,6 +237,7 @@ const BarGraph = () => {
         <svg ref={svgRef}></svg>
         <div ref={tooltipRef} className="tooltip"></div>
       </div>
+      <p>The data show cases in Lakh</p>
     </div>
   );
 };
