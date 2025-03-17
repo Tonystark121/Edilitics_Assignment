@@ -63,6 +63,7 @@ To run this project locally, follow these steps:
 │   │   ├── filter.css  # Styling for the Filter
 │   ├── pages
 │   │   ├── chart.js  # D3 visualization logic
+│   │   ├── LinePlot.js  # D3 visualization logic
 │   ├── App.js
 │   ├── index.js
 └── package.json
