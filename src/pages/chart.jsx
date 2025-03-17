@@ -67,7 +67,7 @@ const BarGraph = () => {
           ? d3.sort(data, (d) => d.positive).map((d) => d.state)
           : sortType === "descending"
           ? d3.sort(data, (d) => -d.positive).map((d) => d.state)
-          : data.map((d) => d.state)
+          : stateCases.map((d) => d.state)
       )
       .range([margin.left, width - margin.right])
       .padding(0.1);
@@ -124,7 +124,7 @@ const BarGraph = () => {
       .attr("font-size", "12px")
       .attr("font-weight", "bold")
       .text((d) => `${Math.floor(d.positive / 100000)}L`)
-      .attr("x", (d) => x(d.state) + x.bandwidth() / 2)
+      .attr("x", (d) => (x(d.state) !== undefined ? x(d.state) + x.bandwidth() / 2 : 0))
       .attr("y", (d) => y(d.positive) - 5);
 
     // Legend Container
