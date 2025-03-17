@@ -64,9 +64,9 @@ const BarGraph = () => {
       .scaleBand()
       .domain(
         sortType === "ascending"
-          ? d3.sort(data, (d) => d.positive).map((d) => d.state)
+          ? d3.sort(stateCases, (d) => d.positive).map((d) => d.state)
           : sortType === "descending"
-          ? d3.sort(data, (d) => -d.positive).map((d) => d.state)
+          ? d3.sort(stateCases, (d) => -d.positive).map((d) => d.state)
           : stateCases.map((d) => d.state)
       )
       .range([margin.left, width - margin.right])
