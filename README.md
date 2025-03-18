@@ -30,8 +30,8 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/your-username/covid-bar-chart.git
-   cd covid-bar-chart
+   git clone git@github.com:Tonystark121/Edilitics_Assignment.git
+   cd demoApp
    ```
 
 2. **Install dependencies**
@@ -45,7 +45,7 @@ To run this project locally, follow these steps:
    ```
 
 4. **Open in browser**
-   The app will be available at `http://localhost:5174/`
+   The app will be available at `http://localhost:5173/`
 
 
 5. **Vercel Project Link**
