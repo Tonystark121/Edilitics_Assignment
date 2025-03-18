@@ -1,6 +1,6 @@
 # COVID-19 Data Visualization
 
-This project is a React-based interactive bar chart visualization of COVID-19 positive cases by state in the U.S. The chart is built using D3.js and supports features such as tooltips, zooming, sorting, filtering, and dynamic theming.
+This project is a React-based interactive bar chart and Line Plot visualization of COVID-19 positive cases by state in the U.S. The chart is built using D3.js and supports features such as tooltips, zooming, sorting, filtering, and dynamic theming.
 
 ## Features
 
@@ -47,6 +47,10 @@ To run this project locally, follow these steps:
 4. **Open in browser**
    The app will be available at `http://localhost:5174/`
 
+
+5. **Vercel Project Link**
+   The app will be available at `https://edilitics-assignment-five.vercel.app/`
+
 ## Project Structure
 
 ```
@@ -79,12 +83,4 @@ To run this project locally, follow these steps:
 ## Contribution
 
 Contributions are welcome! Feel free to fork the repo and submit a pull request.
-
-## License
-
-This project is open-source and available under the MIT License.
-
-## Contact
-
-For any questions or feedback, reach out via GitHub issues.
 
